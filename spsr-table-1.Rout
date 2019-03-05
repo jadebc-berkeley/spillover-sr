@@ -1,0 +1,337 @@
+
+R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> ####################################
+> # spsr-table-1.R
+> 
+> # spillover systematic review
+> # Table 1 - included texts
+> 
+> # by Jade Benjamin-Chung
+> # jadebc@berkeley.edu
+> ####################################
+> rm(list=ls())
+> 
+> source(paste0(here::here(), "/0-config.R"))
+here() starts at /Users/jadederong/Documents/CRG/3iespillover-internal
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Warning message:
+package ‘dplyr’ was built under R version 3.4.4 
+> 
+> # load data
+> data = read.csv(paste0(data_dir,"spillover-sr-extracted-data.csv"))
+> ws.tab = readRDS(paste0(data_dir, "wsplot.RDS"))
+> 
+> # Ali et al, 2013
+> table1_ali = save_results(
++   data = data,
++   myid = "5513",
++   param = "Cluster-level spillover effect",
++   desc = "Indirect protection; adjusted"
++ )
+Warning message:
+package ‘bindrcpp’ was built under R version 3.4.4 
+> 
+> # Baptista et al., 2006
+> table1_baptista = save_results(
++   data = data,
++   myid = "15212-23",
++   param = c(
++     "Vaccine efficacy for infectiousness",
++     "Vaccine efficacy against illness"
++   )
++ )
+> 
+> # Preziosi & Halloran, 2003
+> table1_preziosi = save_results(
++   data = data,
++   myid = "15212",
++   param = "Vaccine efficacy for infectiousness"
++ )
+> 
+> # Ozier 2014
+> table1_ozier = save_results(
++   data = data,
++   myid = "30528-548",
++   param = "Cluster-level spillover effect"
++ )
+> 
+> # Roca et al., 2011
+> table1_roca11 = save_results(
++   data = data,
++   myid = "15137",
++   param = "Spillover effect conditional on exposure to treatment before and after treatment",
++   desc = c("Odds ratio for vaccine type pneumococcal carriage among 2-<5 yrs, CSS-3 vs baseline",
++            "Odds ratio for vaccine type pneumococcal carriage among 5-<15 yrs, CSS-3 vs baseline",
++            "Odds ratio for vaccine type pneumococcal carriage among >=15 yrs, CSS-3 vs baseline")
++ )
+> 
+> # Roca et al., 2013
+> table1_roca13 = save_results(
++   data = data,
++   myid = "15137-11",
++   param = "Spillover effect conditional on exposure to treatment before and after treatment",
++   desc = c("Odds ratio for vaccine type pneumococcal carriage partially vaccinated villages before and 4 years after mass treatment; 2.5 - <5 years",
++            "Odds ratio for vaccine type pneumococcal carriage partially vaccinated villages before and 4 years after mass treatment; 5 to <15 years",
++            "Odds ratio for vaccine type pneumococcal carriage partially vaccinated villages before and 4 years after mass treatment; 15+ years")
++ )
+> 
+> # Khan et al., 2012
+> table1_khan = save_results(
++   data = data,
++   myid = "2147-16",
++   param = "Cluster-level spillover effect")
+> 
+> # Sur et al., 2009
+> table1_sur = save_results(
++   data = data,
++   myid = "2147",
++   param = "Cluster-level spillover effect",
++   desc = "Indirect protection; adjusted")
+> 
+> # Miguel & Kremer, 2004
+> table1_miguel = save_results(
++   data = data,
++   myid = "30528",
++   param = "Cluster-level spillover effect",
++   desc = "Within school externality on moderate-heavy helminth infection; Regression 2 (Corrected estimates in Aiken 2015 IJE / working paper)")
+> 
+> # Hammitt et al, 2014
+> table1_hammitt = save_results(
++   data = data,
++   myid = "15137-14",
++   param = "Spillover before and after treatment",
++   desc = "Prevalence ratio for vaccine-type Streptococcus pneumoniae in individuals 5 years or older in vaccine vs. baseline period")
+> 
+> # House et al, 2009 - manual calculation
+> table1_house = ws.tab[ws.tab$id==11528,]
+> table1_house = table1_house %>% mutate(parameter.scale = "1-RR",
++                  units.outcome = "Trachoma") %>%
++   filter(parameter == "Cluster-level spillover effect among ineligibles") %>%
++   mutate(cluster_size = "Administrative unit with ~ 1400 people", 
++          coverage = "82%") %>%
++   select(authyr, parameter, int1, cluster_size,
++                                   coverage, parameter.scale, units.outcome, 
++                                   pt.est, ci.lower, ci.upper)
+> 
+> # Chidambaram et al, 2004
+> table1_chidambaram = save_results(
++   data = data,
++   myid = "4204",
++   param = "Cluster-level spillover effect",
++   desc = "Odds ratio for trachoma among untreated in treated vs. untreated villages")
+> 
+> # Egere et al, 2012
+> table1_egere = save_results(
++   data = data,
++   myid = "15137-8",
++   param = "Cluster-level spillover effect among ineligibles",
++   desc = "Hazard ratio for vaccine type pneumococcal carriage in vaccinated vs. control group")
+> 
+> 
+> # Print table 1
+> table1 = bind_rows(table1_ali,
++                    table1_baptista,
++                    table1_preziosi,
++                    table1_ozier,
++                    table1_roca11,
++                    table1_roca13,
++                    table1_khan,
++                    table1_sur,
++                    table1_miguel,
++                    table1_hammitt,
++                    table1_house,
++                    table1_chidambaram,
++                    table1_egere)
+There were 16 warnings (use warnings() to see them)
+> table1
+                      authyr
+1           Ali et al., 2013
+2      Baptista et al., 2006
+3      Baptista et al., 2006
+4  Préziosi & Halloran, 2003
+5                Ozier, 2011
+6                Ozier, 2011
+7                Ozier, 2011
+8                Ozier, 2011
+9          Roca et al., 2011
+10         Roca et al., 2011
+11         Roca et al., 2011
+12         Roca et al., 2013
+13         Roca et al., 2013
+14         Roca et al., 2013
+15         Khan et al., 2012
+16          Sur et al., 2009
+17     Miguel & Kremer, 2004
+18      Hammitt et al., 2014
+19        House et al., 2009
+20  Chidambaram et al., 2004
+21        Egere et al., 2012
+                                                                          parameter
+1                                                    Cluster-level spillover effect
+2                                                  Vaccine efficacy against illness
+3                                               Vaccine efficacy for infectiousness
+4                                               Vaccine efficacy for infectiousness
+5                                                    Cluster-level spillover effect
+6                                                    Cluster-level spillover effect
+7                                                    Cluster-level spillover effect
+8                                                    Cluster-level spillover effect
+9  Spillover effect conditional on exposure to treatment before and after treatment
+10 Spillover effect conditional on exposure to treatment before and after treatment
+11 Spillover effect conditional on exposure to treatment before and after treatment
+12 Spillover effect conditional on exposure to treatment before and after treatment
+13 Spillover effect conditional on exposure to treatment before and after treatment
+14 Spillover effect conditional on exposure to treatment before and after treatment
+15                                                   Cluster-level spillover effect
+16                                                   Cluster-level spillover effect
+17                                                   Cluster-level spillover effect
+18                                             Spillover before and after treatment
+19                                 Cluster-level spillover effect among ineligibles
+20                                                   Cluster-level spillover effect
+21                                 Cluster-level spillover effect among ineligibles
+                             int1                           cluster_size
+1                 Cholera vaccine              small group of households
+2               Pertussis vaccine                              household
+3               Pertussis vaccine                              household
+4               Pertussis vaccine         compound/home/residential unit
+5                       Deworming                              household
+6                       Deworming                              household
+7                       Deworming                              household
+8                       Deworming                              household
+9  Pneumococcal conjugate vaccine        village with 80-660 inhabitants
+10 Pneumococcal conjugate vaccine        village with 80-660 inhabitants
+11 Pneumococcal conjugate vaccine        village with 80-660 inhabitants
+12 Pneumococcal conjugate vaccine        village with 80-660 inhabitants
+13 Pneumococcal conjugate vaccine        village with 80-660 inhabitants
+14 Pneumococcal conjugate vaccine        village with 80-660 inhabitants
+15                Typhoid vaccine cluster (about 433 people per cluster)
+16                Typhoid vaccine cluster (about 776 people per cluster)
+17                      Deworming  school with an average of ~400 pupils
+18 Pneumococcal conjugate vaccine                  population of 260,000
+19 Mass azithromycin distribution Administrative unit with ~ 1400 people
+20 Mass azithromycin distribution                                village
+21 Pneumococcal conjugate vaccine           village (80-660 inhabitants)
+                                        coverage parameter.scale
+1                                            36%            1-RR
+2  31% received the vaccine in the past 10 years            1-RR
+3  31% received the vaccine in the past 10 years            1-RR
+4                    72% of infected index cases            1-RR
+5                                                             RD
+6                                                             RD
+7                                                             RD
+8                                                             RD
+9                                           5-9%              OR
+10                                          5-9%              OR
+11                                          5-9%              OR
+12                                          5-9%              OR
+13                                          5-9%              OR
+14                                          5-9%              OR
+15                                           38%            1-RR
+16                                           60%            1-RR
+17                                       ~70-80%              RD
+18                                           79%              RR
+19                                           82%            1-RR
+20                                           91%              RR
+21                                          100%              HR
+          ref.pt.est.desc
+1     Protective efficacy
+2        Vaccine efficacy
+3        Vaccine efficacy
+4     Protective efficacy
+5  Regression coefficient
+6  regression coefficient
+7  Regression coefficient
+8  Regression coefficient
+9              Odds Ratio
+10             Odds Ratio
+11             Odds Ratio
+12             Odds Ratio
+13             Odds Ratio
+14             Odds Ratio
+15    Protective efficacy
+16    Protective efficacy
+17 Regression coefficient
+18       Prevalence ratio
+19                   <NA>
+20             Odds ratio
+21           Hazard Ratio
+                                                              units.outcome
+1                                                         cholera incidence
+2                                                                 pertussis
+3                                                                 pertussis
+4                                                                 pertussis
+5                                                                 height cm
+6                                                                   z-score
+7                                                           dummy, stunting
+8                                                    Raven's matrices score
+9         Pneumococcal nasopharyngeal carriage among children 2 to <5 years
+10       Pneumococcal nasopharyngeal carriage among children 5 to <15 years
+11    Pneumococcal nasopharyngeal carriage among children 15 years or older
+12        Pneumococcal nasopharyngeal carriage among children 2 to <5 years
+13       Pneumococcal nasopharyngeal carriage among children 5 to <15 years
+14    Pneumococcal nasopharyngeal carriage among children 15 years or older
+15                                                        typhoid incidence
+16                                                        typhoid incidence
+17 proportion of pupils infected with any moderate-heavy helminth infection
+18            Pneumococcal nasopharyngeal carriage among children >=5 years
+19                                                                 Trachoma
+20                                                                 trachoma
+21                                                    pneumococcal carriage
+      pt.est      ci.lower    ci.upper
+1    0.00000  -59.00000000 37.00000000
+2   12.50000   -5.30000000 27.30000000
+3   61.60000   12.80000000 83.10000000
+4   85.00000   46.00000000 95.00000000
+5    0.20400   -0.37810930  0.78610930
+6    0.02900   -0.05723842  0.11523842
+7    0.00700   -0.02435942  0.03835942
+8    0.22000    0.06712281  0.37287719
+9    0.28000    0.11000000  0.70000000
+10   0.25000    0.14000000  0.46000000
+11   0.43000    0.17000000  1.10000000
+12   0.15000    0.07000000  0.33000000
+13   0.21000    0.10000000  0.42000000
+14   0.02000    0.00300000  0.18000000
+15 -10.00000 -116.00000000 44.00000000
+16  44.00000    2.00000000 69.00000000
+17  -0.18000   -0.31719748 -0.04280252
+18   0.34000    0.18000000  0.62000000
+19  35.43307    8.10678275 54.63334006
+20   2.90000    1.10000000  7.50000000
+21   0.39000    0.26000000  0.58000000
+> 
+> write.csv(table1, file = paste0(tab_dir, "spsr-table-1.csv"), row.names=FALSE)
+> 
+> 
+> 
+> proc.time()
+   user  system elapsed 
+  0.948   0.062   1.092 

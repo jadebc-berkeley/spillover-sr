@@ -1,0 +1,101 @@
+
+R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> ####################################
+> # spsr-table-5-terms.R
+> 
+> # spillover systematic review
+> # Table 5 - search terms
+> 
+> # by Jade Benjamin-Chung
+> # jadebc@berkeley.edu
+> ####################################
+> rm(list=ls())
+> 
+> source(paste0(here::here(), "/0-config.R"))
+here() starts at /Users/jadederong/Documents/CRG/3iespillover-internal
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Warning message:
+package ‘dplyr’ was built under R version 3.4.4 
+> 
+> # load data
+> terms = read.csv(paste0(data_dir,"spillover-sr-terms.csv"))
+> master = read.csv(paste0(data_dir,"spillover-sr-extracted-data.csv"))
+> 
+> master = master %>% select(id, field)
+> master = master[!duplicated(master),] %>%
++   filter(!is.na(field))
+Warning message:
+package ‘bindrcpp’ was built under R version 3.4.4 
+>   
+> #------------------------------------
+> # Table: terms used
+> #------------------------------------
+> # merge in fields
+> table.terms.data = full_join(terms, master, by="id")
+> 
+> table.terms = table.terms.data %>%
++   group_by(field) %>%
++   summarise_at(vars(contagion:seconda), sum, na.rm = TRUE)
+> 
+> table.terms.print = as.data.frame(t(table.terms %>% select(-field)))
+> colnames(table.terms.print) = names(table(table.terms$field))
+> 
+> table.terms.print = table.terms.print %>%
++   mutate(label = rownames(table.terms.print)) %>%
++   mutate(Total = Economics + Geography + `Public Health`) %>%
++   arrange(-Total) %>%
++   
++   mutate(lab = case_when(
++     label == "indirect.effect" ~ "Indirect effect*",
++     label == "spillover" ~ "Spillover*",
++     label == "externalit" ~ "Externalit*",
++     label == "seconda" ~ "Seconda*",
++     label == "indirect.protection" ~ "Indirect protection",
++     label == "herd.protect" ~ "Herd protect*",
++     label == "diffusion" ~ "Diffusion",
++     label == "herd.effect" ~ "Herd effect*",
++     label == "herd.immunity" ~ "Herd immunity",
++     label == "peer.effect" ~ "Peer effect*",
++     label == "unexpected" ~ "Unexpected",
++     label == "indirect.protective" ~ "Indirect protective",
++     label == "interference" ~ "Interference",
++     label == "contagion" ~ "Contagion",
++     label == "unexpected.benefit" ~ "Unexpected benefit*"
++   )) %>%
++   select(lab, Economics:`Public Health`, Total)
+> 
+> write.csv(table.terms.print, file = paste0(tab_dir, "spsr-table-5.csv"), row.names=FALSE)
+> 
+> 
+> proc.time()
+   user  system elapsed 
+  0.797   0.061   0.935 

@@ -1,0 +1,223 @@
+
+R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> ####################################
+> # spsr-table-2.R
+> 
+> # spillover systematic review
+> # Table 2 - included texts
+> 
+> # by Jade Benjamin-Chung
+> # jadebc@berkeley.edu
+> ####################################
+> rm(list=ls())
+> 
+> source(paste0(here::here(), "/0-config.R"))
+here() starts at /Users/jadederong/Documents/CRG/3iespillover-internal
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Warning message:
+package ‘dplyr’ was built under R version 3.4.4 
+> 
+> # load data
+> data = read.csv(paste0(data_dir,"spillover-sr-extracted-data.csv"))
+> ws.tab = readRDS(paste0(data_dir, "wsplot.RDS"))
+> 
+> # Baird et al., 2003 
+> table2_baird = save_results(
++   data = data,
++   myid = "30528-980",
++   param = "Spillover effect conditional on treatment density"
++ )
+Warning message:
+package ‘bindrcpp’ was built under R version 3.4.4 
+> 
+> # Shekhawat et al, 2014
+> # No quantitative estimates
+> table2_shekhawat = save_results(
++     data = data,
++     myid = "11528-11",
++     param = "Cluster-level spillover effect**"
++ )
+> 
+> # Paul et al, 1962  
+> # No quantitative estimates
+> table2_paul = save_results(
++   data = data,
++   myid = "11096",
++   param = "Vaccine efficacy**"
++ )
+> 
+> # Perez-Heydrich et al., 2014
+> table2_perez = save_results(
++   data = data,
++   myid = "2647-1",
++   param = "Spillover effect conditional on treatment density"
++ )
+> 
+> # Hawley et al., 2003
+> table2_hawley = save_results(
++   data = data,
++   myid = "31031-4-r",
++   param = "Spillover effect conditional on distance to nearest treated cluster",
++   desc = c("Odds ratio for test of trend for malaria and distance to nearest ITN treated compound",
++            "Odds ratio for test of trend for high-density parasitemia and distance to nearest ITN treated compound",
++            "Odds ratio for test of trend for moderate anemia and distance to nearest ITN treated compound",
++            "Odds ratio for test of trend for hemoglobin level and distance to nearest ITN treated compound",
++            "Hazard ratio for test of trend for child mortality and distance to nearest ITN treated compound")
++ )
+> 
+> # Ziegelhofer et al, 2012
+> table2_ziegelhofer = save_results(
++   data = data,
++   myid = "30528-469",
++   param = "Spillover effect conditional on treatment density"
++ )
+> 
+> # Miguel and Kremer, 2004 
+> table2_miguel = save_results(
++   data = data,
++   myid = "30528",
++   param = "Spillover effect conditional on treatment density",
++   desc = c("Across school externality on moderate-heavy helminth infection (students within 3km); Regression 1 (Corrected estimates in Aiken 2015 IJE / working paper)",
++            "Across school externality on moderate-heavy helminth infection (students 3-6km); Regression 1 (Corrected estimates in Aiken 2015 IJE / working paper)")
++ )
+> 
+> 
+> 
+> # Print table 2
+> table2 = bind_rows(table2_baird,
++                    table2_shekhawat,
++                    table2_paul,
++                    table2_perez,
++                    table2_hawley,
++                    table2_ziegelhofer,
++                    table2_miguel
++ )
+> 
+> table2 = table2 %>% select(-c(cluster_size, coverage))
+> 
+> table2
+                        authyr
+1           Baird et al., 2013
+2           Baird et al., 2013
+3           Baird et al., 2013
+4           Baird et al., 2013
+5           Baird et al., 2013
+6          Shekawat et al., NA
+7                     Paul, NA
+8  Perez-Heydrich et al., 2014
+9          Hawley et al., 2003
+10         Hawley et al., 2003
+11         Hawley et al., 2003
+12         Hawley et al., 2003
+13         Hawley et al., 2003
+14           Ziegelhöfer, 2012
+15       Miguel & Kremer, 2004
+16       Miguel & Kremer, 2004
+                                                             parameter
+1                    Spillover effect conditional on treatment density
+2                    Spillover effect conditional on treatment density
+3                    Spillover effect conditional on treatment density
+4                    Spillover effect conditional on treatment density
+5                    Spillover effect conditional on treatment density
+6                                     Cluster-level spillover effect**
+7                                                   Vaccine efficacy**
+8                    Spillover effect conditional on treatment density
+9  Spillover effect conditional on distance to nearest treated cluster
+10 Spillover effect conditional on distance to nearest treated cluster
+11 Spillover effect conditional on distance to nearest treated cluster
+12 Spillover effect conditional on distance to nearest treated cluster
+13 Spillover effect conditional on distance to nearest treated cluster
+14                   Spillover effect conditional on treatment density
+15                   Spillover effect conditional on treatment density
+16                   Spillover effect conditional on treatment density
+                       int1 parameter.scale        ref.pt.est.desc
+1      Subsidized deworming              RD Regression coefficient
+2      Subsidized deworming              RD Regression coefficient
+3      Subsidized deworming              RD Regression coefficient
+4      Subsidized deworming              RD Regression coefficient
+5      Subsidized deworming              RD Regression coefficient
+6                      <NA>                                       
+7                      <NA>                                       
+8           Cholera vaccine              RD        Risk difference
+9  Insecticide treated nets              RR             Odds ratio
+10 Insecticide treated nets              RR             Odds ratio
+11 Insecticide treated nets              RR             Odds ratio
+12 Insecticide treated nets              RR             Odds ratio
+13 Insecticide treated nets              RR           Hazard ratio
+14    Improved water supply              RD Regression coefficient
+15                Deworming              RD Regression coefficient
+16                Deworming              RD Regression coefficient
+                                                                      units.outcome
+1                            proportion of respondents reporting “very good” health
+2                                                                            height
+3                                                                               BMI
+4                                                             number of pregnancies
+5                                                     indicator for any miscarriage
+6                                                                                  
+7                                                                                  
+8                                                             cholera risk per 1000
+9                   indicator for malaria based on distance to ITN treated compound
+10 indicator for high-density parasitemia based on distance to ITN treated compound
+11          indicator for moderate anemia based on distance to ITN treated compound
+12                                                       dummy, hemoglobin < 9 g/dL
+13          indicator for child mortality based on distance to ITN treated compound
+14                                                              diarrhea prevalence
+15         proportion of pupils infected with any moderate-heavy helminth infection
+16         proportion of pupils infected with any moderate-heavy helminth infection
+   pt.est    ci.lower     ci.upper
+1   0.128 -0.09739586  0.353395858
+2  -1.891 -5.15825996  1.376259962
+3   0.317 -0.21023031  0.844230312
+4  -0.335 -0.95826855  0.288268547
+5  -0.078 -0.15051867 -0.005481333
+6      NA          NA           NA
+7      NA          NA           NA
+8   5.290  2.61000000  7.960000000
+9   0.920  0.75000000  1.120000000
+10  0.890  0.78000000  1.010000000
+11  0.780  0.69000000  0.890000000
+12  0.180  0.06000000  0.310000000
+13  0.940  0.90000000  0.980000000
+14 -0.590 -1.31518667  0.135186674
+15 -0.210 -0.40599640 -0.014003602
+16 -0.050 -0.20679712  0.106797119
+> 
+> write.csv(table2, file = paste0(tab_dir, "spsr-table-2.csv"), row.names=FALSE)
+> 
+> 
+> 
+> 
+> 
+> 
+> proc.time()
+   user  system elapsed 
+  0.881   0.060   1.027 

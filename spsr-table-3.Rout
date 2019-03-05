@@ -1,0 +1,758 @@
+
+R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> ####################################
+> # spsr-table-3.R
+> 
+> # spillover systematic review
+> # Table 3 - included texts
+> 
+> # by Jade Benjamin-Chung
+> # jadebc@berkeley.edu
+> ####################################
+> rm(list=ls())
+> 
+> source(paste0(here::here(), "/0-config.R"))
+here() starts at /Users/jadederong/Documents/CRG/3iespillover-internal
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Warning message:
+package ‘dplyr’ was built under R version 3.4.4 
+> 
+> # load data
+> data = read.csv(paste0(data_dir,"spillover-sr-extracted-data.csv"))
+> ws.tab = readRDS(paste0(data_dir, "wsplot.RDS"))
+> 
+> # Avitabile, 2012    
+> table3_avitabile = save_results(
++   data = data,
++   myid = "30971",
++   param = "Cluster-level spillover effect among ineligibles",
++   desc = c("Impact on non-poor (non-recipients) of health requirements of PROGRESA for cervical cancer screening. Non-poor in treatment villages are 6.1% more likely to get a cervical cancer screening.",
++            "Impact on non-poor (non-recipients) of health requirements of PROGRESA for blood sugar screening. Non-poor in treatment villages are 1.0% more likely to get a blood sugar screening.",
++            "Impact on non-poor (non-recipients) of health requirements of PROGRESA for blood pressure screening. Non-poor in treatment villages are 2.5% more likely to get a blood pressure screening.")
++ )
+Warning message:
+package ‘bindrcpp’ was built under R version 3.4.4 
+> 
+> # Handa et al, 2001
+> table3_handa = save_results(
++   data = data,
++   myid = "31409",
++   param = "Cluster-level spillover effect among ineligibles",
++   desc = c("Differences in mean nutrition surveillance rates, Treatment Locality, Round 1-2 (Non-poor)",
++            "Differences in mean nutrition surveillance rates, Treatment Locality, Round 1-3 (Non-poor)")
++ )
+> 
+> # Ribas et al, 2011
+> table3_ribas = save_results(
++   data = data,
++   myid = "30528-754",
++   param = "Cluster-level spillover effect among ineligibles"
++ )
+> 
+> # Baird et al, 2013
+> table3_baird = save_results(
++   data = data,
++   myid = "30528-137",
++   param = "Cluster-level spillover effect",
++   desc = c("Change in probability of psychological distress among untreated in treatment group compared to controls; during intervention; adjusted",
++            "Change in probability of psychological distress among untreated in treatment group compared to controls; after intervention; adjusted",
++            "Change in probability of psychological distress among untreated in treatment group who did not live in treated household compared to controls; during intervention; adjusted",
++            "Change in probability of psychological distress among untreated in treatment group who did not live in treated household compared to controls; after intervention; adjusted",
++            "Change in probability of psychological distress among untreated in treatment group who did live in treated household compared to controls; during intervention; adjusted",
++            "Change in probability of psychological distress among untreated in treatment group who did live in treated household compared to controls; after intervention; adjusted")
++ )
+> 
+> # Contreras and Maitra, 2013    PROBLEM
+> table3_contreras = save_results(
++   data = data,
++   myid = "30971-3",
++   param = "Cluster-level spillover effect among ineligibles",
++   desc = c("Short run spillover effects; ill in the prior 15 days; all; first follow-up",
++            "Medium run spillover effects; ill in the prior 15 days; all; second follow-up",
++            "Short run spillover effects; being in bed as a result of the illness; all; first follow-up",
++            "Medium run spillover effects; being in bed as a result of the illness; all; second follow-up",
++            "Short run spillover effects; hospitalized in the prior year; all; first follow-up",
++            "Medium run spillover effects; hospitalized in the prior year; all; second follow-up")
++ )
+> 
+> # Bhattacharya et al, 2013       
+> # Exact quantitative estimates not included in paper
+> table3_bhattacharya = data.frame(
++   authyr = "Bhattacharya et al., 2013",
++   parameter = "Total effect conditional on treatment density",
++   int1 = "Subsidized insecticide-treated nets",
++   scale = "",
++   coverage = "",
++   parameter.scale = "",
++   ref.pt.est.desc = "",
++   units.outcome = "",
++   pt.est = NA,
++   ci.lower = NA,
++   ci.upper = NA
++ )
+> 
+> # Banerjee et al., 2010     UPDATE SPREADSHEET PARAMETER
+> table3_banerjee = save_results(
++   data = data,
++   myid = "4048",
++   param = "Spillover effect conditional on distance to clusters",
++   desc = c("Relative risk for # immunizations in villages adjacent to intervention group A and control group",
++            "Relative risk for # immunizations in villages adjacent to intervention group B and control group",
++            "Relative risk for percent with at least one immunization in villages adjacent to intervention group A and control group",
++            "Relative risk for percent with at least one immunization in villages adjacent to intervention group B and control group",
++            "Relative risk for percent with BCG scar in villages adjacent to intervention group A and control group",
++            "Relative risk for percent with BCG scar in villages adjacent to intervention group B and control group",
++            "Relative risk for complete immunization in villages adjacent to intervention group A and control group",
++            "Relative risk for complete immunization in villages adjacent to intervention group B and control group")
++ )
+> 
+> # Tontarawongsa et al., 2011 
+> table3_tontarawongsa1 = save_results(
++   data = data,
++   myid = "30528-736",
++   param = "Spillover effect conditional on number of social network links",
++   desc = c("Spillovers on untreated (Non-BISWA households) in treated areas; recently acquired at least one ITN",
++            "Spillovers on untreated (Non-BISWA households) in treated areas; Fraction of Non-BISWA household members that slept under an ITN last night",
++            "Spillovers on untreated (Non-BISWA households) in treated areas; recently acquired at least one ITN",
++            "Spillovers on untreated (Non-BISWA households) in treated areas; Fraction of Non-BISWA household members that slept under an ITN last night")
++ )
+> 
+> table3_tontarawongsa2 = save_results(
++   data = data,
++   myid = "30528-736",
++   param = "Spillover effect conditional on number of social network links' ITN acquisition and use",
++   desc = c("IV Estimation of peer effects in bed net ownership and usage: Non-BISWA households in a village recently purchased at least one ITN given Average per capita bednets owned by peers",
++            "IV Estimation of peer effects in bed net ownership and usage: Fraction of Non-BISWA household members that slept under an ITN last night given Average per capita bednets owned by peers",
++            "IV Estimation of peer effects in bed net ownership and usage: Non-BISWA households in a village recently purchased at least one bednet given Average per capita bednets owned by peers",
++            "IV Estimation of peer effects in bed net ownership and usage: Fraction of Non-BISWA household members that slept under at least one bednet last night given Average per capita bednets owned by peers")
++ )
+> 
+> table3_tontarawongsa3 = save_results(
++   data = data,
++   myid = "30528-736",
++   param = "Spillover effect conditional on number of social network links' ITN acquisition and use",
++   desc = c("IV Estimation of peer effects in ITN ownership and usage: Non-BISWA households in a village recently purchased at least one ITN given Average last night ITN usage among peers",
++            "IV Estimation of peer effects in ITN ownership and usage: Fraction of Non-BISWA household members that slept under an ITN last night, given Average last night ITN usage among peers",
++            "IV Estimation of peer effects in ITN ownership and usage: Non-BISWA households in a village recently purchased at least one ITN given Average last night ITN usage among peers",
++            "IV Estimation of peer effects in ITN ownership and usage: Fraction of Non-BISWA household members that slept under an ITN last night, given Average last night ITN usage among peers")
++ )
+> 
+> # Godlonton and Thornton, 2012  
+> table3_godlonton = save_results(
++   data = data,
++   myid = "30528-179",
++   param = "Total effect conditional on outcome density",
++   desc = c("Probability of learning HIV test result associated with % of neighbors within 0.5 km learning test result; all respondents; IV; Table 2",
++            "Probability of learning HIV test result associated with any incentive * % of neighbors within 0.5 km learning test result; all respondents IV")
++ )
+> 
+> # Chong et al., 2013 
+> table3_chong1 = save_results(
++   data = data,
++   myid = "31157",
++   param = "Cluster-level spillover effect"
++ )
+> 
+> table3_chong2 = save_results(
++   data = data,
++   myid = "31157",
++   param = "Spillover effect conditional on treatment density"
++ )
+> 
+> # German et al., 2012 
+> table3_german = save_results(
++   data = data,
++   myid = "3272",
++   param = "Spillover effect among social network members",
++   desc = c("Difference in CES-D among network controls; adjusted for baseline CES-D + covariates",
++            "Difference in CES-D among network intervention group; adjusted for baseline CES-D + covariates")
++ )
+> 
+> # Kremer and Miguel, 2007
+> table3_kremer = save_results(
++   data = data,
++   myid = "30528-167",
++   param = "Overall effect conditional on number of social network links",
++   desc = "Social effect in parent networks; Association between child deworming and number of parent links to early treatment schools; adjusted"
++ )
+> 
+> # Janssens et al, 2006  
+> table3_janssens1 = save_results(
++   data = data,
++   myid = "16384",
++   param = "Cluster-level spillover effect",
++   desc = c("IV treatment-on-untreated tuberculosis immunization",
++            "IV treatment-on-untreated DTP immunization",
++            "IV treatment-on-untreated measles immunization")
++ )
+> 
+> table3_janssens2 = save_results(
++   data = data,
++   myid = "16384",
++   param = "Cluster-level spillover effect in which controls are matched to the untreated",
++   desc = c("Impact of Village dummy on TB vaccination. (PSM separately controls for selection into treatment.) This should have been the preferred specification. (Also: they omit the instruments used in the other specifications from the propensity score.)",
++            "Impact of Village dummy on DTP vaccination. (PSM separately controls for selection into treatment.) This should have been the preferred specification. (Also: they omit the instruments used in the other specifications from the propensity score.)",
++            "Impact of Village dummy on Measles vaccination. (PSM separately controls for selection into treatment.)  This should have been the preferred specification. (Also: they omit the instruments used in the other specifications from the propensity score.)")
++ )
+> 
+> # Dupas, 2006 
+> table3_dupas = save_results(
++   data = data,
++   myid = "30528-196",
++   param = "Spillover effect conditional on treatment density",
++   desc = c("Simple difference in probability untreated girls ever had sex and ever used a condom associated with the share of treated girls in their school; IV-2SLS",
++            "Simple difference in probability untreated girls ever had sex and ever used a condom associated with the share of treated boys in their school; IV-2SLS",
++            "Simple difference in probability untreated boys ever had sex and ever used a condom associated with the share of treated girls in their school; IV-2SLS",
++            "Simple difference in probability untreated boys ever had sex and ever used a condom associated with the share of treated boys in their school; IV-2SLS")
++ )
+> 
+> # Azad, 2010   
+> # Manual calculation
+> 
+> azad = data %>% 
++   filter(id == "27358") %>%
++   select(description, n.exposed, N)
+> 
+> ndeaths_noheard = azad %>% 
++   filter(description == "Neonatal deaths among non-group members") %>%
++   select(n.exposed) %>%
++   as.numeric()
+> 
+> ndeaths_heard = azad %>% 
++   filter(description == "Neonatal deaths among women who had heard of groups") %>%
++   select(n.exposed) %>%
++   as.numeric()
+> 
+> ndeaths_control = azad %>% 
++   filter(description == "Neonatal mortality rate in control cluster") %>%
++   select(n.exposed) %>%
++   as.numeric()
+> 
+> lbirths_noheard = azad %>% 
++   filter(description == "Neonatal deaths among non-group members") %>%
++   select(N) %>%
++   as.numeric()
+> 
+> lbirths_heard = azad %>% 
++   filter(description == "Neonatal deaths among women who had heard of groups") %>%
++   select(N) %>%
++   as.numeric()
+> 
+> lbirths_control = azad %>% 
++   filter(description == "Neonatal mortality rate in control cluster") %>%
++   select(N) %>%
++   as.numeric()
+> 
+> nmr_control = ndeaths_control / lbirths_control
+> nmr_heard = ndeaths_heard / lbirths_heard
+> nmr_noheard = ndeaths_noheard / lbirths_noheard
+> 
+> # rd heard of
+> rd_heard = nmr_heard - nmr_control
+> 
+> # rd had not heard of
+> rd_noheard = nmr_noheard - nmr_control
+> 
+> table3_azad = data.frame(
++   authyr = rep("Azad et al., 2010",2),
++   parameter = rep("Cluster-spillover effect conditional on exposure to treatment",2),
++   int1= "Women's groups and health service strengthening",
++   parameter.scale = rep("",2),
++   units.outcome = c("Neonatal mortality among women exposed to women's groups who did not participate in them but who heard of them", 
++                     "Neonatal mortality among women exposed to women's groups who did not participate in them but who had not heard of them"),
++   pt.est = c(rd_heard, rd_noheard),
++   ci.lower = c(NA, NA),
++   ci.upper = c(NA, NA)
++ )
+> 
+> # Singh, 2011   
+> table3_singh = save_results(
++   data = data,
++   myid = "26115",
++   param = "Cluster-level spillover effect",
++   desc = "Weight for age z-score change, diff-in-diff,spillover effect"
++ )
+> 
+> # Bjorkman and Svensson, 2009   RERUN and check other param name
+> table3_bjorkman = save_results(
++   data = data,
++   myid = "30528-184",
++   param = "Overall effect conditional on distance",
++   desc = c("Difference in mean outpatients per month in treatment vs. control clusters adjusting for control clinic within 10km of treatment clinic",
++            "Difference in mean deliveries per month in treatment vs. control clusters adjusting for control clinic within 10km of treatment clinic")
++ )
+> 
+> # Print table 3
+> table3 = bind_rows(table3_avitabile,
++                    table3_handa,
++                    table3_ribas,
++                    table3_baird,
++                    table3_contreras,
++                    table3_bhattacharya,
++                    table3_banerjee,
++                    table3_tontarawongsa1, 
++                    table3_tontarawongsa2,
++                    table3_tontarawongsa3,
++                    table3_godlonton,
++                    table3_chong1,
++                    table3_chong2,
++                    table3_german,
++                    table3_kremer,
++                    table3_janssens1,
++                    table3_janssens2,
++                    table3_dupas,
++                    table3_azad,
++                    table3_singh,
++                    table3_bjorkman)
+There were 50 or more warnings (use warnings() to see the first 50)
+> 
+> table3 = table3 %>% select(-c(cluster_size, coverage))
+> 
+> table3
+                                              authyr
+1                                    Avitabile, 2012
+2                                    Avitabile, 2012
+3                                    Avitabile, 2012
+4                                 Handa et al., 2001
+5                                 Handa et al., 2001
+6                                 Ribas et al., 2011
+7                                 Baird et al., 2013
+8                                 Baird et al., 2013
+9                                 Baird et al., 2013
+10                                Baird et al., 2013
+11                                Baird et al., 2013
+12                                Baird et al., 2013
+13                          Contreras & Maitra, 2013
+14                          Contreras & Maitra, 2013
+15                          Contreras & Maitra, 2013
+16                          Contreras & Maitra, 2013
+17                          Contreras & Maitra, 2013
+18                          Contreras & Maitra, 2013
+19                         Bhattacharya et al., 2013
+20                             Banerjee et al., 2010
+21                             Banerjee et al., 2010
+22                             Banerjee et al., 2010
+23                             Banerjee et al., 2010
+24                             Banerjee et al., 2010
+25                             Banerjee et al., 2010
+26                             Banerjee et al., 2010
+27                             Banerjee et al., 2010
+28                                 Tontarawongsa, NA
+29                                 Tontarawongsa, NA
+30                                 Tontarawongsa, NA
+31                                 Tontarawongsa, NA
+32                                 Tontarawongsa, NA
+33                                 Tontarawongsa, NA
+34                                 Tontarawongsa, NA
+35                                 Tontarawongsa, NA
+36                                 Tontarawongsa, NA
+37                                 Tontarawongsa, NA
+38                                 Tontarawongsa, NA
+39                                 Tontarawongsa, NA
+40                        Godlonton & Thornton, 2012
+41                        Godlonton & Thornton, 2012
+42 Chong, Gonzalez-Navarro, Karlan, and Valdivia, NA
+43 Chong, Gonzalez-Navarro, Karlan, and Valdivia, NA
+44 Chong, Gonzalez-Navarro, Karlan, and Valdivia, NA
+45 Chong, Gonzalez-Navarro, Karlan, and Valdivia, NA
+46 Chong, Gonzalez-Navarro, Karlan, and Valdivia, NA
+47 Chong, Gonzalez-Navarro, Karlan, and Valdivia, NA
+48 Chong, Gonzalez-Navarro, Karlan, and Valdivia, NA
+49 Chong, Gonzalez-Navarro, Karlan, and Valdivia, NA
+50                                        German, NA
+51                                        German, NA
+52                               Miguel & Kremer, NA
+53                                      Janssens, NA
+54                                      Janssens, NA
+55                                      Janssens, NA
+56                                      Janssens, NA
+57                                      Janssens, NA
+58                                      Janssens, NA
+59                                       Dupas, 2006
+60                                       Dupas, 2006
+61                                       Dupas, 2006
+62                                       Dupas, 2006
+63                                 Azad et al., 2010
+64                                 Azad et al., 2010
+65                            Singh, Year not listed
+66                               Bjorkman et al., NA
+67                               Bjorkman et al., NA
+                                                                                 parameter
+1                                         Cluster-level spillover effect among ineligibles
+2                                         Cluster-level spillover effect among ineligibles
+3                                         Cluster-level spillover effect among ineligibles
+4                                         Cluster-level spillover effect among ineligibles
+5                                         Cluster-level spillover effect among ineligibles
+6                                         Cluster-level spillover effect among ineligibles
+7                                                           Cluster-level spillover effect
+8                                                           Cluster-level spillover effect
+9                                                           Cluster-level spillover effect
+10                                                          Cluster-level spillover effect
+11                                                          Cluster-level spillover effect
+12                                                          Cluster-level spillover effect
+13                                        Cluster-level spillover effect among ineligibles
+14                                        Cluster-level spillover effect among ineligibles
+15                                        Cluster-level spillover effect among ineligibles
+16                                        Cluster-level spillover effect among ineligibles
+17                                        Cluster-level spillover effect among ineligibles
+18                                        Cluster-level spillover effect among ineligibles
+19                                           Total effect conditional on treatment density
+20                                    Spillover effect conditional on distance to clusters
+21                                    Spillover effect conditional on distance to clusters
+22                                    Spillover effect conditional on distance to clusters
+23                                    Spillover effect conditional on distance to clusters
+24                                    Spillover effect conditional on distance to clusters
+25                                    Spillover effect conditional on distance to clusters
+26                                    Spillover effect conditional on distance to clusters
+27                                    Spillover effect conditional on distance to clusters
+28                          Spillover effect conditional on number of social network links
+29                          Spillover effect conditional on number of social network links
+30                          Spillover effect conditional on number of social network links
+31                          Spillover effect conditional on number of social network links
+32 Spillover effect conditional on number of social network links' ITN acquisition and use
+33 Spillover effect conditional on number of social network links' ITN acquisition and use
+34 Spillover effect conditional on number of social network links' ITN acquisition and use
+35 Spillover effect conditional on number of social network links' ITN acquisition and use
+36 Spillover effect conditional on number of social network links' ITN acquisition and use
+37 Spillover effect conditional on number of social network links' ITN acquisition and use
+38 Spillover effect conditional on number of social network links' ITN acquisition and use
+39 Spillover effect conditional on number of social network links' ITN acquisition and use
+40                                             Total effect conditional on outcome density
+41                                             Total effect conditional on outcome density
+42                                                          Cluster-level spillover effect
+43                                                          Cluster-level spillover effect
+44                                                          Cluster-level spillover effect
+45                                                          Cluster-level spillover effect
+46                                                          Cluster-level spillover effect
+47                                       Spillover effect conditional on treatment density
+48                                       Spillover effect conditional on treatment density
+49                                       Spillover effect conditional on treatment density
+50                                           Spillover effect among social network members
+51                                           Spillover effect among social network members
+52                            Overall effect conditional on number of social network links
+53                                                          Cluster-level spillover effect
+54                                                          Cluster-level spillover effect
+55                                                          Cluster-level spillover effect
+56           Cluster-level spillover effect in which controls are matched to the untreated
+57           Cluster-level spillover effect in which controls are matched to the untreated
+58           Cluster-level spillover effect in which controls are matched to the untreated
+59                                       Spillover effect conditional on treatment density
+60                                       Spillover effect conditional on treatment density
+61                                       Spillover effect conditional on treatment density
+62                                       Spillover effect conditional on treatment density
+63                           Cluster-spillover effect conditional on exposure to treatment
+64                           Cluster-spillover effect conditional on exposure to treatment
+65                                                          Cluster-level spillover effect
+66                                                  Overall effect conditional on distance
+67                                                  Overall effect conditional on distance
+                                                      int1 parameter.scale
+1                               Conditional cash transfers              RD
+2                               Conditional cash transfers              RD
+3                               Conditional cash transfers              RD
+4                               Conditional cash transfers              RD
+5                               Conditional cash transfers              RD
+6                               Conditional cash transfers              RD
+7                               Conditional cash transfers              RD
+8                               Conditional cash transfers              RD
+9                               Conditional cash transfers              RD
+10                              Conditional cash transfers              RD
+11                              Conditional cash transfers              RD
+12                              Conditional cash transfers              RD
+13                              Conditional cash transfers                
+14                              Conditional cash transfers              RD
+15                              Conditional cash transfers                
+16                              Conditional cash transfers                
+17                              Conditional cash transfers                
+18                              Conditional cash transfers              RD
+19                     Subsidized insecticide-treated nets                
+20        Vaccines (BCG, DPT, polio, measles) + incentives              RR
+21        Vaccines (BCG, DPT, polio, measles) + incentives              RR
+22        Vaccines (BCG, DPT, polio, measles) + incentives              RR
+23        Vaccines (BCG, DPT, polio, measles) + incentives              RR
+24        Vaccines (BCG, DPT, polio, measles) + incentives              RR
+25        Vaccines (BCG, DPT, polio, measles) + incentives              RR
+26        Vaccines (BCG, DPT, polio, measles) + incentives              RR
+27        Vaccines (BCG, DPT, polio, measles) + incentives              RR
+28                                                    <NA>              RD
+29                                                    <NA>              RD
+30                                                    <NA>              RD
+31                                                    <NA>              RD
+32                                                    <NA>              RD
+33                                                    <NA>              RD
+34                                                    <NA>              RD
+35                                                    <NA>              RD
+36                                                    <NA>              RD
+37                                                    <NA>              RD
+38                                                    <NA>              RD
+39                                                    <NA>              RD
+40 Incentives for voluntary counseling and testing for HIV              RD
+41 Incentives for voluntary counseling and testing for HIV              RD
+42                                                    <NA>              RD
+43                                                    <NA>              RD
+44                                                    <NA>              RD
+45                                                    <NA>              RD
+46                                                    <NA>              RD
+47                                                    <NA>              RD
+48                                                    <NA>              RD
+49                                                    <NA>              RD
+50                                                    <NA>              RD
+51                                                    <NA>              RD
+52                                                    <NA>              RD
+53                                                    <NA>              RD
+54                                                    <NA>              RD
+55                                                    <NA>              RD
+56                                                    <NA>              RD
+57                                                    <NA>              RD
+58                                                    <NA>              RD
+59                      Information about HIV transmission              RD
+60                      Information about HIV transmission              RD
+61                      Information about HIV transmission              RD
+62                      Information about HIV transmission              RD
+63         Women's groups and health service strengthening                
+64         Women's groups and health service strengthening                
+65                                     Nutrition education              RD
+66                                                    <NA>              RD
+67                                                    <NA>              RD
+          ref.pt.est.desc
+1  Regression coefficient
+2  Regression coefficient
+3  Regression coefficient
+4         Mean difference
+5         Mean difference
+6  Regression coefficient
+7  Regression coefficient
+8  Regression coefficient
+9  Regression coefficient
+10 Regression coefficient
+11 Regression coefficient
+12 Regression coefficient
+13 Regression coefficient
+14 Regression coefficient
+15 Regression coefficient
+16 Regression coefficient
+17 Regression coefficient
+18 Regression coefficient
+19                       
+20          Relative risk
+21          Relative risk
+22             Risk ratio
+23             Risk ratio
+24             Risk ratio
+25             Risk ratio
+26             Risk ratio
+27             Risk ratio
+28 Regression coefficient
+29 Regression coefficient
+30 Regression coefficient
+31 Regression coefficient
+32 Regression coefficient
+33 Regression coefficient
+34 Regression coefficient
+35 Regression coefficient
+36 Regression coefficient
+37 Regression coefficient
+38 Regression coefficient
+39 Regression coefficient
+40 Regression coefficient
+41 Regression coefficient
+42        mean difference
+43        mean difference
+44        mean difference
+45        mean difference
+46 Regression coefficient
+47 Regression coefficient
+48 Regression coefficient
+49 Regression coefficient
+50        Mean difference
+51        Mean difference
+52 Regression coefficient
+53 Probability difference
+54 Regression coefficient
+55 Regression coefficient
+56 Regression coefficient
+57 Regression coefficient
+58 Regression coefficient
+59 Regression coefficient
+60 Regression coefficient
+61 Regression coefficient
+62 Regression coefficient
+63                   <NA>
+64                   <NA>
+65 Regression coefficient
+66 Regression coefficient
+67 Regression coefficient
+                                                                                                            units.outcome
+1                                                                      probability of demanding cervical cancer screening
+2                                                                          probability of demanding blood sugar screening
+3                                                                       probability of demanding blood pressure screening
+4                                                                                             nutrition surveillance rate
+5                                                                                             nutrition surveillance rate
+6                                                                                3 or more visits to measure child growth
+7                                                Psychological distress among all untreated girls during the intervention
+8                                                 Psychological distress among all untreated girls after the intervention
+9                Psychological distress among untreated girls in households without treated girls during the intervention
+10                Psychological distress among untreated girls in households without treated girls after the intervention
+11                  Psychological distress among untreated girls in households with treated girls during the intervention
+12                   Psychological distress among untreated girls in households with treated girls after the intervention
+13                                                         Indicator for illness in the 15 days prior to follow-up survey
+14                                                         Indicator for illness in the 15 days prior to follow-up survey
+15                                                                      Indicator for being in bed as a result of illness
+16                                                                      Indicator for being in bed as a result of illness
+17                                                          Indicator for hospitalization in the year prior to the survey
+18                                                                        hospitalization in the year prior to the survey
+19                                                                                                                       
+20                                                                                                   mean # immunizations
+21                                                                                                   mean # immunizations
+22                                                                                 indicator for having =>1 immunisations
+23                                                                                 indicator for having =>1 immunisations
+24                                                                                          indicator for having BCG scar
+25                                                                                          indicator for having BCG scar
+26                                                                             indicator for having complete immunization
+27                                                                             indicator for having complete immunization
+28                                                                     probability of recently acquiring at least one ITN
+29                                                        fraction of household members having slept under ITN last night
+30                                                                     probability of recently acquiring at least one net
+31                                                        fraction of household members having slept under net last night
+32                                                                     probability of recently acquiring at least one ITN
+33                                                        fraction of household members having slept under ITN last night
+34                                                                     probability of recently acquiring at least one net
+35                                                        fraction of household members having slept under net last night
+36                                                                     probability of recently acquiring at least one ITN
+37                                                        fraction of household members having slept under ITN last night
+38                                                                     probability of recently acquiring at least one net
+39                                                        fraction of household members having slept under net last night
+40                                      respondents' own probability of attending the VCT center and learning HIV results
+41                                      respondents' own probability of attending the VCT center and learning HIV results
+42                                                                                              knowledge index at 1 week
+43                                                                                            knowledge index at 6 months
+44                                                                                               attitude index at 1 week
+45                                                                                             attitude index at 6 months
+46                                                                                  condom voucher redemption at 6 months
+47                                                                                            knowledge index at 6 months
+48                                                                                              attidue index at 6 months
+49                                                                                  condom voucher redemption at 6 months
+50                                                                                                            CES-D score
+51                                                                                                            CES-D score
+52                                                    likelihood that the respondent’s child took deworming drugs in 2001
+53                                                                               probability of tuberculosis immunization
+54                                                                                       probability of DTP immunization 
+55                                                                                   probability of measles immunization 
+56                                                                              probability of tuberculosis immunization 
+57                                                                                       probability of DTP immunization 
+58                                                                                   probability of measles immunization 
+59                                                                   probability girl ever had sex and ever used a condom
+60                                                                   probability girl ever had sex and ever used a condom
+61                                                                    probability boy ever had sex and ever used a condom
+62                                                                    probability boy ever had sex and ever used a condom
+63         Neonatal mortality among women exposed to women's groups who did not participate in them but who heard of them
+64 Neonatal mortality among women exposed to women's groups who did not participate in them but who had not heard of them
+65                                                                                                 weight-for-age z-score
+66                                                    no. of patients visiting the facility per month for outpatient care
+67                                                                            no. of deliveries at the facility per month
+         pt.est      ci.lower      ci.upper scale
+1   0.061000000   0.021800720   0.100199280  <NA>
+2   0.010000000  -0.025279352   0.045279352  <NA>
+3   0.025000000  -0.010279352   0.060279352  <NA>
+4   2.307000000   0.817427372   3.796572628  <NA>
+5   6.846000000   2.632077433  11.059922567  <NA>
+6  -0.014000000  -0.168837155   0.140837155  <NA>
+7   0.064000000   0.007161044   0.120838956  <NA>
+8   0.007000000  -0.055718848   0.069718848  <NA>
+9   0.099000000   0.038241116   0.159758884  <NA>
+10  0.001000000  -0.057798920   0.059798920  <NA>
+11 -0.086000000  -0.187918127   0.015918127  <NA>
+12  0.015000000  -0.141797119   0.171797119  <NA>
+13 -0.029600000  -0.059587449   0.000387449  <NA>
+14 -0.018000000  -0.055435312   0.019435312  <NA>
+15  0.017000000  -0.045914844   0.079914844  <NA>
+16  0.041700000  -0.028466711   0.111866711  <NA>
+17 -0.005400000  -0.020099730   0.009299730  <NA>
+18 -0.016400000  -0.031295726  -0.001504274  <NA>
+19           NA            NA            NA      
+20  1.180000000   0.920000000   1.430000000  <NA>
+21  1.480000000   1.180000000   1.770000000  <NA>
+22  1.000000000   0.800000000   1.190000000  <NA>
+23  1.050000000   0.860000000   1.240000000  <NA>
+24  1.000000000   0.730000000   1.280000000  <NA>
+25  1.050000000   0.780000000   1.320000000  <NA>
+26  1.830000000   0.930000000   2.730000000  <NA>
+27  3.470000000   2.180000000   4.770000000  <NA>
+28 -0.008000000  -0.141277551   0.125277551  <NA>
+29  0.071000000  -0.011318487   0.153318487  <NA>
+30  0.183000000  -0.091394958   0.457394958  <NA>
+31  0.157000000  -0.013516867   0.327516867  <NA>
+32 -0.050000000  -0.320475030   0.220475030  <NA>
+33  0.020000000  -0.144636975   0.184636975  <NA>
+34  0.042000000  -0.349992797   0.433992797  <NA>
+35  0.056000000  -0.216434994   0.328434994  <NA>
+36 -0.107000000  -0.283396759   0.069396759  <NA>
+37  0.007000000  -0.114517767   0.128517767  <NA>
+38 -0.036000000  -0.304515066   0.232515066  <NA>
+39  0.016000000  -0.179996398   0.211996398  <NA>
+40  0.106000000   0.013881693   0.198118307  <NA>
+41 -0.064000000  -0.226677011   0.098677011  <NA>
+42  0.015000000  -0.073198379   0.103198379  <NA>
+43  0.013000000  -0.147717047   0.173717047  <NA>
+44  0.026000000  -0.066118307   0.118118307  <NA>
+45  0.023000000  -0.076958163   0.122958163  <NA>
+46  0.040000000  -0.030558703   0.110558703  <NA>
+47 -0.074000000  -0.479712545   0.331712545  <NA>
+48 -0.046000000  -0.326274850   0.234274850  <NA>
+49 -0.156000000  -0.273597839  -0.038402161  <NA>
+50 -0.092000000  -0.180000000  -0.010000000  <NA>
+51 -0.095000000  -0.180000000  -0.010000000  <NA>
+52 -0.031000000  -0.058439496  -0.003560504  <NA>
+53  0.149000000   0.052961765   0.245038235  <NA>
+54  0.122000000   0.024001801   0.219998199  <NA>
+55  0.268000000   0.170001801   0.365998199  <NA>
+56  0.108000000   0.059000900   0.156999100  <NA>
+57  0.090000000   0.044920828   0.135079172  <NA>
+58  0.089000000   0.041960864   0.136039136  <NA>
+59  0.476000000   0.111446699   0.840553301  <NA>
+60 -0.388000000  -0.797632473   0.021632473  <NA>
+61  0.109000000  -0.253593337   0.471593337  <NA>
+62  0.042000000  -0.387232113   0.471232113  <NA>
+63 -0.004823927            NA            NA  <NA>
+64 -0.004050204            NA            NA  <NA>
+65  0.013000000  -0.067358523   0.093358523  <NA>
+66 68.100000000 -51.065810260 187.265810260  <NA>
+67  2.600000000  -5.435852337  10.635852337  <NA>
+> 
+> 
+> write.csv(table3, file = paste0(tab_dir, "spsr-table-3.csv"), row.names=FALSE)
+> 
+> 
+> 
+> 
+> proc.time()
+   user  system elapsed 
+  1.029   0.063   1.175 

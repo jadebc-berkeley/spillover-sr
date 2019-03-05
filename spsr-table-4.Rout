@@ -1,0 +1,173 @@
+
+R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> ####################################
+> # spsr-table-4.R
+> 
+> # spillover systematic review
+> # Table 4 - included texts
+> 
+> # by Jade Benjamin-Chung
+> # jadebc@berkeley.edu
+> ####################################
+> rm(list=ls())
+> 
+> source(paste0(here::here(), "/0-config.R"))
+here() starts at /Users/jadederong/Documents/CRG/3iespillover-internal
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Warning message:
+package ‘dplyr’ was built under R version 3.4.4 
+> 
+> # load data
+> data = read.csv(paste0(data_dir,"spillover-sr-extracted-data.csv"))
+> ws.tab = readRDS(paste0(data_dir, "wsplot.RDS"))
+> 
+> # Fitzsimons et al., 2012
+> table4_fitzsimons = save_results(
++   data = data,
++   myid = "30528-617",
++   param = "Cluster-level spillover effect among ineligibles",
++   desc = c("Difference in height-for-age Z-score among those in treated vs. untreated clusters; ineligible",
++            "Difference in weight-for-age Z-score among those in treated vs. untreated clusters; ineligible",
++            "Difference in weight-for-height Z-score among those in treated vs. untreated clusters; ineligible",
++            "Difference in diarrhea among those in treated vs. untreated clusters; ineligible",
++            "Difference in vomiting among those in treated vs. untreated clusters; ineligible",
++            "Difference in fast breathing among those in treated vs. untreated clusters; ineligible",
++            "Difference in fever among those in treated vs. untreated clusters; ineligible",
++            "Difference in chills among those in treated vs. untreated clusters; ineligible")
++ )
+Warning message:
+package ‘bindrcpp’ was built under R version 3.4.4 
+> 
+> # Kazianga et al., 2014
+> table4_kazianga = save_results(
++   data = data,
++   myid = "31503",
++   param = "Cluster-level spillover effect among ineligibles"
++ )
+> 
+> # Zivin et al., 2009
+> table4_zivin = save_results(
++   data = data,
++   myid = "30528-9",
++   param = "Cluster-level spillover effect",
++   desc = "Weight-for-height Z-score, Comparison within ARV households, ARVHH (<100 Days) * Round2, Regression 1"
++ )
+> 
+> # Buttenheim et al., 2011
+> # No disaggregated results
+> table4_buttenheim = save_results(
++   data = data,
++   myid = "18457",
++   param = "Cluster-level spillover effect among ineligibles"
++ )
+> 
+> # Print table 4
+> table4 = bind_rows(table4_fitzsimons,
++                    table4_kazianga,
++                    table4_zivin,
++                    table4_buttenheim
++ )
+> 
+> table4 = table4 %>% select(-c(cluster_size, coverage))
+> 
+> table4
+                    authyr                                        parameter
+1  Fitzsimons et al., 2012 Cluster-level spillover effect among ineligibles
+2  Fitzsimons et al., 2012 Cluster-level spillover effect among ineligibles
+3  Fitzsimons et al., 2012 Cluster-level spillover effect among ineligibles
+4  Fitzsimons et al., 2012 Cluster-level spillover effect among ineligibles
+5  Fitzsimons et al., 2012 Cluster-level spillover effect among ineligibles
+6  Fitzsimons et al., 2012 Cluster-level spillover effect among ineligibles
+7  Fitzsimons et al., 2012 Cluster-level spillover effect among ineligibles
+8  Fitzsimons et al., 2012 Cluster-level spillover effect among ineligibles
+9    Kazianga et al., 2014 Cluster-level spillover effect among ineligibles
+10   Kazianga et al., 2014 Cluster-level spillover effect among ineligibles
+11   Kazianga et al., 2014 Cluster-level spillover effect among ineligibles
+12   Kazianga et al., 2014 Cluster-level spillover effect among ineligibles
+13      Zivin et al., 2009                   Cluster-level spillover effect
+14 Buttenheim et al., 2011 Cluster-level spillover effect among ineligibles
+                                         int1 parameter.scale
+1  Information on infant nutrition and health              RD
+2  Information on infant nutrition and health              RD
+3  Information on infant nutrition and health              RD
+4  Information on infant nutrition and health              RD
+5  Information on infant nutrition and health              RD
+6  Information on infant nutrition and health              RD
+7  Information on infant nutrition and health              RD
+8  Information on infant nutrition and health              RD
+9                      School feeding program              RD
+10                     School feeding program              RD
+11                     School feeding program              RD
+12                     School feeding program              RD
+13                         HIV/AIDS treatment              RD
+14                     School feeding program                
+          ref.pt.est.desc                units.outcome  pt.est    ci.lower
+1  Regression coefficient                      Z-score -0.2660 -0.54039496
+2  Regression coefficient                      Z-score -0.1420 -0.45559424
+3  Regression coefficient                      Z-score -0.0381 -0.33209460
+4  Regression coefficient       indicator for diarrhea  0.0040 -0.05479892
+5  Regression coefficient       indicator for vomiting -0.0420 -0.13411831
+6  Regression coefficient indicator for fast breathing -0.0080 -0.10991813
+7  Regression coefficient          indicator for fever -0.0180 -0.12971795
+8  Regression coefficient         indicator for chills -0.0330 -0.17019748
+9  Regression coefficient       weight-for-age z-score  0.0310 -0.22967521
+10 Regression coefficient       height-for-age z-score  0.0940 -0.21763427
+11 Regression coefficient       weight-for-age z-score  0.4450  0.15884526
+12 Regression coefficient       height-for-age z-score  0.0790 -0.26203373
+13 Regression coefficient    weight-for-height z-score  0.3740 -1.16261176
+14                                                          NA          NA
+      ci.upper
+1  0.008394958
+2  0.171594238
+3  0.255894598
+4  0.062798920
+5  0.050118307
+6  0.093918127
+7  0.093717947
+8  0.104197479
+9  0.291675210
+10 0.405634274
+11 0.731154742
+12 0.420033733
+13 1.910611764
+14          NA
+> 
+> write.csv(table4, file = paste0(tab_dir, "spsr-table-4.csv"), row.names=FALSE)
+> 
+> 
+> 
+> 
+> 
+> 
+> proc.time()
+   user  system elapsed 
+  0.822   0.061   0.962 

@@ -1,0 +1,17 @@
+"authyr","parameter","int1","parameter.scale","ref.pt.est.desc","units.outcome","pt.est","ci.lower","ci.upper"
+"Baird et al., 2013","Spillover effect conditional on treatment density","Subsidized deworming","RD","Regression coefficient","proportion of respondents reporting “very good” health",0.128,-0.0973958582221062,0.353395858222106
+"Baird et al., 2013","Spillover effect conditional on treatment density","Subsidized deworming","RD","Regression coefficient","height",-1.891,-5.15825996222827,1.37625996222827
+"Baird et al., 2013","Spillover effect conditional on treatment density","Subsidized deworming","RD","Regression coefficient","BMI",0.317,-0.210230311841274,0.844230311841274
+"Baird et al., 2013","Spillover effect conditional on treatment density","Subsidized deworming","RD","Regression coefficient","number of pregnancies",-0.335,-0.958268547083737,0.288268547083737
+"Baird et al., 2013","Spillover effect conditional on treatment density","Subsidized deworming","RD","Regression coefficient","indicator for any miscarriage",-0.078,-0.150518667427982,-0.00548133257201802
+"Shekawat et al., NA","Cluster-level spillover effect**",NA,"","","",NA,NA,NA
+"Paul, NA","Vaccine efficacy**",NA,"","","",NA,NA,NA
+"Perez-Heydrich et al., 2014","Spillover effect conditional on treatment density","Cholera vaccine","RD","Risk difference","cholera risk per 1000",5.29,2.61,7.96
+"Hawley et al., 2003","Spillover effect conditional on distance to nearest treated cluster","Insecticide treated nets","RR","Odds ratio","indicator for malaria based on distance to ITN treated compound",0.92,0.75,1.12
+"Hawley et al., 2003","Spillover effect conditional on distance to nearest treated cluster","Insecticide treated nets","RR","Odds ratio","indicator for high-density parasitemia based on distance to ITN treated compound",0.89,0.78,1.01
+"Hawley et al., 2003","Spillover effect conditional on distance to nearest treated cluster","Insecticide treated nets","RR","Odds ratio","indicator for moderate anemia based on distance to ITN treated compound",0.78,0.69,0.89
+"Hawley et al., 2003","Spillover effect conditional on distance to nearest treated cluster","Insecticide treated nets","RR","Odds ratio","dummy, hemoglobin < 9 g/dL",0.18,0.06,0.31
+"Hawley et al., 2003","Spillover effect conditional on distance to nearest treated cluster","Insecticide treated nets","RR","Hazard ratio","indicator for child mortality based on distance to ITN treated compound",0.94,0.9,0.98
+"Ziegelhöfer, 2012","Spillover effect conditional on treatment density","Improved water supply","RD","Regression coefficient","diarrhea prevalence",-0.59,-1.31518667427982,0.13518667427982
+"Miguel & Kremer, 2004","Spillover effect conditional on treatment density","Deworming","RD","Regression coefficient","proportion of pupils infected with any moderate-heavy helminth infection",-0.21,-0.405996398454005,-0.0140036015459946
+"Miguel & Kremer, 2004","Spillover effect conditional on treatment density","Deworming","RD","Regression coefficient","proportion of pupils infected with any moderate-heavy helminth infection",-0.05,-0.206797118763204,0.106797118763204

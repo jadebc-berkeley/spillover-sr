@@ -1,0 +1,15 @@
+"authyr","parameter","int1","parameter.scale","ref.pt.est.desc","units.outcome","pt.est","ci.lower","ci.upper"
+"Fitzsimons et al., 2012","Cluster-level spillover effect among ineligibles","Information on infant nutrition and health","RD","Regression coefficient","Z-score",-0.266,-0.540394957835608,0.00839495783560751
+"Fitzsimons et al., 2012","Cluster-level spillover effect among ineligibles","Information on infant nutrition and health","RD","Regression coefficient","Z-score",-0.142,-0.455594237526409,0.171594237526409
+"Fitzsimons et al., 2012","Cluster-level spillover effect among ineligibles","Information on infant nutrition and health","RD","Regression coefficient","Z-score",-0.0381,-0.332094597681008,0.255894597681008
+"Fitzsimons et al., 2012","Cluster-level spillover effect among ineligibles","Information on infant nutrition and health","RD","Regression coefficient","indicator for diarrhea",0.004,-0.0547989195362016,0.0627989195362016
+"Fitzsimons et al., 2012","Cluster-level spillover effect among ineligibles","Information on infant nutrition and health","RD","Regression coefficient","indicator for vomiting",-0.042,-0.134118307273383,0.0501183072733825
+"Fitzsimons et al., 2012","Cluster-level spillover effect among ineligibles","Information on infant nutrition and health","RD","Regression coefficient","indicator for fast breathing",-0.008,-0.109918127196083,0.0939181271960828
+"Fitzsimons et al., 2012","Cluster-level spillover effect among ineligibles","Information on infant nutrition and health","RD","Regression coefficient","indicator for fever",-0.018,-0.129717947118783,0.0937179471187831
+"Fitzsimons et al., 2012","Cluster-level spillover effect among ineligibles","Information on infant nutrition and health","RD","Regression coefficient","indicator for chills",-0.033,-0.170197478917804,0.104197478917804
+"Kazianga et al., 2014","Cluster-level spillover effect among ineligibles","School feeding program","RD","Regression coefficient","weight-for-age z-score",0.031,-0.229675209943827,0.291675209943827
+"Kazianga et al., 2014","Cluster-level spillover effect among ineligibles","School feeding program","RD","Regression coefficient","height-for-age z-score",0.094,-0.217634273541869,0.405634273541869
+"Kazianga et al., 2014","Cluster-level spillover effect among ineligibles","School feeding program","RD","Regression coefficient","weight-for-age z-score",0.445,0.158845258257152,0.731154741742848
+"Kazianga et al., 2014","Cluster-level spillover effect among ineligibles","School feeding program","RD","Regression coefficient","height-for-age z-score",0.079,-0.262033733309969,0.420033733309969
+"Zivin et al., 2009","Cluster-level spillover effect","HIV/AIDS treatment","RD","Regression coefficient","weight-for-height z-score",0.374,-1.1626117638794,1.9106117638794
+"Buttenheim et al., 2011","Cluster-level spillover effect among ineligibles","School feeding program","","","",NA,NA,NA

@@ -1,0 +1,141 @@
+
+R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> ####################################
+> # spsr-supp-table-group-data.R
+> 
+> # spillover systematic review
+> # Supplement 7, Table 1
+> 
+> # Studies that estimated spillovers 
+> # through reduced transmission using 
+> # group-level data
+> 
+> # by Jade Benjamin-Chung
+> # jadebc@berkeley.edu
+> ####################################
+> rm(list=ls())
+> 
+> source(paste0(here::here(), "/0-config.R"))
+here() starts at /Users/jadederong/Documents/CRG/3iespillover-internal
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Warning message:
+package ‘dplyr’ was built under R version 3.4.4 
+> 
+> # load data
+> data = read.csv(paste0(data_dir,"spillover-sr-extracted-data.csv"))
+> rob =  read.csv(paste0(data_dir,"spillover-sr-rob-overall.csv"))
+> 
+> # filter to group level parameters
+> data = data %>% filter(parameter == "Treatment coverage mean" | 
++                          parameter == "Treatment coverage effect")
+Warning message:
+package ‘bindrcpp’ was built under R version 3.4.4 
+> 
+> # filter to necessary columns
+> data = data %>% select(id, authors, pub.year, country, int1, outcome.primary, spillover.scale)
+> 
+> # drop duplicates
+> data = data[!duplicated(data),]
+> 
+> # merge in rob
+> rob = rob %>% select(id, quality.rating)
+> data.m = left_join(data, rob, by="id")
+> 
+> # sort by author + year
+> data.m = data.m %>% mutate(authyr = paste0(authors, ", ", pub.year)) %>%
++   arrange(authyr) %>%
++   select(authyr, country, int1, outcome.primary, spillover.scale, quality.rating)
+> 
+> data.m
+                     authyr     country
+1          Ali et al., 2005  Bangladesh
+2          Ali et al., 2008  Bangladesh
+3          Ali et al., 2013       India
+4         Chen et al., 2014  Bangladesh
+5      Cooper & Fitch, 1983   St. Lucia
+6         Emch et al., 2006  Bangladesh
+7         Emch et al., 2009  Bangladesh
+8  Forleo-Neto et al., 1999      Brazil
+9        Haile et al., 2013    Ethiopia
+10         Huq et al., 2010  Bangladesh
+11      Khatib et al., 2012    Tanzania
+12        Root et al., 2011  Bangladesh
+13        Root et al., 2014 Philippines
+                                               int1
+1                                   Cholera vaccine
+2                                   Cholera vaccine
+3                                   Cholera vaccine
+4             Haemophilus influenzae type b vaccine
+5                                 Pertussis vaccine
+6                                   Cholera vaccine
+7                                   Cholera vaccine
+8             Haemophilus influenzae type b vaccine
+9                                          Latrines
+10 Water filtration with sari cloth and nylon cloth
+11                                  Cholera vaccine
+12                                  Cholera vaccine
+13                   Pneumococcal conjugate vaccine
+                          outcome.primary
+1                                 Cholera
+2                                 Cholera
+3                                 Cholera
+4                               Pneumonia
+5                               Pertussis
+6                                 Cholera
+7                                 Cholera
+8  Haemophilus influenzae type b carriage
+9                                Trachoma
+10                                Cholera
+11                                Cholera
+12                                Cholera
+13                              Pneumonia
+                                               spillover.scale quality.rating
+1                           500 m radius around each household       moderate
+2                           500 m radius around each household       moderate
+3  dwelling (household or group of households), buffer of 250m       moderate
+4                                   neighborhood (1 km radius)            low
+5                         Community of less than 10,000 people       very low
+6                          2000 m radius around each household       moderate
+7                           500 m radius around each household       moderate
+8                                                         city            low
+9                                     subkebele (~1500 people)       very low
+10                         1000 m radius around each household       moderate
+11                          400 m radius around each household            low
+12                                   bari-level social network       moderate
+13                              ~1km buffer around each person       moderate
+> 
+> write.csv(data.m, file = paste0(tab_dir, "spsr-supp7-table1.csv"), row.names=FALSE)
+> 
+> 
+> proc.time()
+   user  system elapsed 
+  0.798   0.088   1.053 
